@@ -1,0 +1,40 @@
+<div class="container-fluid mt-3">
+  <div>
+    <p class="alert alert-warning">para agregar una nueva venta, primero debes seleccionar un producto. <a [routerLink]="['/productos']" class="btn btn-light">Ver productos</a></p>
+  </div>
+  <div class="table-responsive mt-3">
+  <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+          <tr>
+              <td>Id</td>
+              <td>Comprador</td>
+              <td>Cant.</td>
+              <td>Fecha de venta</td>
+              <td>Tipo de pago</td>
+              <td>Precio unitario</td>
+              <td>Precio total</td>
+              <td>Observaciones</td>
+              <td>Id Producto</td>
+              <td>Acciones</td>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let venta of ventas | async" >
+            <td>{{venta.idVentas}}</td>
+            <td>{{venta.comprador}}</td>
+            <td>{{venta.cantidad}}</td>
+            <td>{{venta.fechaVenta | date:'yyyy-MM-dd'}}</td>
+            <td>{{venta.tipoPago}}</td>
+            <td>{{venta.precioUnitario}}</td>
+            <td>{{venta.precioTotal}}</td>
+            <td>{{venta.observaciones}}</td>
+            <td>{{venta.producto.nombreProducto}}</td>
+            <td>
+              <a [routerLink]="['/ventas/edit', venta.idVentas]" class="btn btn-info">Editar</a>
+              <a [routerLink]="['/ventas/delete', venta.idVentas]" class="btn btn-danger">Borrar</a>
+            </td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+</div>

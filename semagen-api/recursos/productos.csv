@@ -1,0 +1,114 @@
+idProducto,nombreProducto,stock,created_at,updated_at
+100,"Margarita Cristal Rosca",5027,NULL,NULL
+101,"Margarita Cristal Fina",1641,NULL,NULL
+102,"Margarita Cristal Cuadrada",1592,NULL,NULL
+103,"Margarita Cristal Extriada",1648,NULL,NULL
+104,"Margarita Cristal NT",529,NULL,NULL
+105,"Margarita Cristal Hualy",766,NULL,NULL
+106,"Delta Cristal Rosca",2057,NULL,NULL
+107,"Delta Cristal Fipalsa ",0,NULL,NULL
+108,"Delta Cristal Fina",1748,NULL,NULL
+109,"Delta Cristal Cuadrada",170,NULL,NULL
+110,"Delta Cristal NT",1003,NULL,NULL
+111,"Delta Cristal Hualy",0,NULL,NULL
+112,"Delta Cristal Extriada",892,NULL,NULL
+113,"Delta Cristal 1/2 Luna",304,NULL,NULL
+114,"Delta Acrílico Rosca",112,NULL,NULL
+115,"Delta Acrílico Fino",251,NULL,NULL
+116,"Delta Acrílico Extriado",249,NULL,NULL
+117,"Delta Acrílico 1/2 Luna",349,NULL,NULL
+118,"Delta Acrílico cuadrada",383,NULL,NULL
+119,"Mediana Cristal Rosca",807,NULL,NULL
+120,"Mediana Cristal Fina",595,NULL,NULL
+121,"Mediana Cristal Extriada",474,NULL,NULL
+122,"Mediana Cristal Cuadrada",109,NULL,NULL
+123,"Mediana Cristal 1/2 Luna",0,NULL,NULL
+124,"Mediana Acrílica Rosca",354,NULL,NULL
+125,"Mediana Acrílica Fina",1623,NULL,NULL
+126,"Mediana Acrílica Extriada",243,NULL,NULL
+127,"Mediana Acrílica 1/2 Luna",216,NULL,NULL
+128,"Mediana Acrílica NT",80,NULL,NULL
+129,"Mediana Acrílica Cuadrada",158,NULL,NULL
+130,"Mediana Acrílica Hualy",218,NULL,NULL
+131,"Margarita Acrílica Chica Rosca",344,NULL,NULL
+132,"Margarita Acrílica Chica Fina",0,NULL,NULL
+133,"Margarita Acrílica Chica Cuadrada",691,NULL,NULL
+134,"Margarita Acrílica Chica Extriada",620,NULL,NULL
+135,"Margarita Acrílica Chica Hualy",0,NULL,NULL
+136,"Margarita Acrílica Grande Rosca",0,NULL,NULL
+137,"Margarita Acrílica Grande Fina",5,NULL,NULL
+138,"Margarita Acrílica Grande NT",0,NULL,NULL
+139,"Margarita Acrílica Grande Extriada",207,NULL,NULL
+140,"Fuguesa Fina",1022,NULL,NULL
+141,"Fuguesa Extriada",0,NULL,NULL
+142,"Hely Cristal Chica Rosca",1538,NULL,NULL
+143,"Hely Cristal Chica Extriada",498,NULL,NULL
+144,"Hely Cristal Chica Fina",341,NULL,NULL
+145,"Hely Cristal Chica Cuadrada",182,NULL,NULL
+146,"Hely Cristal Chica Hualy",50,NULL,NULL
+147,"Hely Acrílico Chica Rosca",38,NULL,NULL
+148,"Hely Acrílico Chico Fino",0,NULL,NULL
+149,"Hely Acrílico Chico Cuadrado",51,NULL,NULL
+150,"Hely Acrílico Chico Extriado",0,NULL,NULL
+151,"Hely Acrílico Grande Rosca",0,NULL,NULL
+152,"Hely Acrílico Grande Fino",335,NULL,NULL
+153,"Hely Acrílico Grande Cuadrado",54,NULL,NULL
+154,"Hely Acrílico Grande Extriado",0,NULL,NULL
+155,"Hely Acrílico Grande NT",0,NULL,NULL
+156,"Winson Acrílica Grande Rosca",122,NULL,NULL
+157,"Winson Acrílico Grande Fino",172,NULL,NULL
+158,"Winson Acrílico Grande Cuadrado",253,NULL,NULL
+159,"Winson Acrílico Grande Extriado",80,NULL,NULL
+160,"Winson Acrílico Chico Rosca",17,NULL,NULL
+161,"Winson Acrílico Chico Fino",0,NULL,NULL
+162,"Winson Acrilico Chico Cuadrado",0,NULL,NULL
+163,"Winson Acrilico Chico Extriado",0,NULL,NULL
+164,"Winson Cristal Grande Rosca",0,NULL,NULL
+165,"Winson Cristal Grande Fino",0,NULL,NULL
+166,"Winson Cristal Grande Cuadrado",0,NULL,NULL
+167,"Winson Cristal Grande Extriado",0,NULL,NULL
+168,"Winson Cristal Chico Rosca",0,NULL,NULL
+169,"Winson Cristal Chico Fino",0,NULL,NULL
+170,"Winson Cristal Chica Extriada",0,NULL,NULL
+171,"Winson Cristal Chica Cuadrada",0,NULL,NULL
+172,"Niple Macho - ovni",1481,NULL,NULL
+173,"Niple Hembra - corona",3826,NULL,NULL
+174,"Brazos de Ducha Selfi Blanco",442,NULL,NULL
+175,"Brazos de Ducha Selfi Bone",86,NULL,NULL
+176,"Brazos de Ducha Selfi Celeste",130,NULL,NULL
+177,"Brazos de Ducha Selfi Rosado",153,NULL,NULL
+178,"Brazos de Ducha Verde Claro",126,NULL,NULL
+179,"Brazos de Ducha Verde Oscuro",13,NULL,NULL
+180,"Brazos de Ducha Selfi Azul Pastel",187,NULL,NULL
+181,"Brazos de Ducha Selfi Guinda",87,NULL,NULL
+182,"Brazos Españoles",261,NULL,NULL
+183,Zamak,495,NULL,NULL
+184,Canoplas,2046,NULL,NULL
+185,Crucetas,0,NULL,NULL
+186,"Tapitas ",0,NULL,NULL
+187,"Planchuela de Zamak S/Cromar",0,NULL,NULL
+188,"Planchuela de Zamak Cromada",0,NULL,NULL
+189,Rompechorros,0,NULL,NULL
+190,"Chapitas de galusa",0,NULL,NULL
+191,Arandelas,0,NULL,NULL
+192,"Tapas grandes",4292,NULL,NULL
+193,"Diamantada Acrílica",434,NULL,NULL
+194,Manubrios,195,NULL,NULL
+195,"Niple de colores hembra",0,NULL,NULL
+196,"Brazo pesado blanco",121,NULL,NULL
+197,"Brazo pesado de colores",302,NULL,NULL
+198,"Tubo para brazo selfi blanco",0,NULL,NULL
+199,"Tubo para brazo selfi bone",0,NULL,NULL
+200,"Tubo para brazo selfi guinda",0,NULL,NULL
+201,"Tubo para brazo selfi celeste",0,NULL,NULL
+202,"Tubo para brazo selfi rosado",0,NULL,NULL
+203,"Tubo para brazo selfi verde claro",0,NULL,NULL
+204,"Tubo para brazo selfi verde oscuro",0,NULL,NULL
+205,"Tubo para brazo selfi azul pastel",0,NULL,NULL
+206,"Niple de colores hembra",0,NULL,NULL
+207,Piñones,0,NULL,NULL
+208,"Tuercas para baño",0,NULL,NULL
+210,"Dispensador azul/blanco",0,NULL,NULL
+211,"Vasos de cristal",0,NULL,NULL
+212,"Caja de luz negra",45,NULL,NULL
+213,"Caja de luz azul",45,NULL,NULL
