@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
 
 import { ProductoService } from './services/producto.service';
@@ -44,7 +44,8 @@ import { EditarProduccionComponent } from './produccion/editar-produccion/editar
     BrowserModule,
     routes,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProductoService, VentaService, ProduccionService],
   bootstrap: [AppComponent]

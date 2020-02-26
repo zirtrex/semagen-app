@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { ProductoService } from '../../services/producto.service';
 import { VentaService } from '../../services/venta.service';
 import { Producto } from '../../models/producto';
 import { Venta } from '../../models/venta';
+import { CheckCantidad } from '../../validators/check-cantidad.validator';
 
 @Component({
   selector: 'app-crear-venta',
@@ -12,16 +14,56 @@ import { Venta } from '../../models/venta';
 })
 export class CrearVentaComponent implements OnInit, OnDestroy {
 
+  crearVentaForm: FormGroup;
   idProducto: any;
+  nombreProducto: any;
   params: any;
 
   venta = new Venta();
 
-  constructor(private activatedRoute: ActivatedRoute, private router:Router, private ventaService:VentaService) { }
+  maxVenta = 0;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private router:Router,
+              public fb: FormBuilder,
+              private ventaService:VentaService,
+              private productoService:ProductoService
+  ) { }
 
   ngOnInit() {
     this.params = this.activatedRoute.params.subscribe(params => this.idProducto = params['idProducto']);
     this.venta.idProducto = this.idProducto;
+    this.productoService.obtenerProducto(this.idProducto)
+      .subscribe(
+          response => {
+            console.log(response);
+            this.maxVenta = response.stock;
+            this.nombreProducto = response.nombreProducto;
+            (<FormControl>this.crearVentaForm.controls['idProducto'])
+                    .setValue(this.idProducto, { onlySelf: true });
+
+            (<FormControl>this.crearVentaForm.controls['cantidadMaxima'])
+                    .setValue(this.maxVenta, { onlySelf: true });
+          }
+      );
+
+    this.crearVentaForm = this.fb.group({
+        idProducto: ['', Validators.required],
+        comprador: [''],
+        cantidad: ['', Validators.required],
+        cantidadMaxima: ['' , Validators.required],
+        fechaVenta: ['', Validators.required],
+        tipoPago: ['', Validators.required],
+        precioUnitario: ['', Validators.required],
+        observaciones: ['']
+    },
+    {
+        //validator: CheckCantidad('cantidad', 'cantidadMaxima')
+    });
+  }
+
+  get f() {
+    return this.crearVentaForm.controls;
   }
 
   ngOnDestroy(){
@@ -29,15 +71,19 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
   }
 
   crearVenta(venta){
-    console.log(venta);
-    this.ventaService.agregarVenta(venta)
-      .subscribe(
-        response => {
-            console.log(response);
-            this.router.navigate(['/ventas']);            
-        },
-        error => console.log(<any> error)
-      )
+    if (this.crearVentaForm.valid)
+    {
+        var venta = this.crearVentaForm.value;
+        console.log(venta);
+        this.ventaService.agregarVenta(venta)
+          .subscribe(
+            response => {
+                console.log(response);
+                this.router.navigate(['/ventas']);
+            },
+            error => console.log(<any> error)
+          );
+    }
   }
 
 }

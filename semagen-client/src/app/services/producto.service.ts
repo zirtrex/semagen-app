@@ -7,7 +7,7 @@ import { Producto } from '../models/producto';
 @Injectable()
 export class ProductoService {
 
-    private REST_API_SERVER_DEV = "http://localhost/Rafael/Proyectos/Proyectos_Web/inventario_semagen/public/index.php/api/v1/productos";
+    private REST_API_SERVER_DEV = "http://localhost/Rafael/Proyectos/Proyectos_Web/semagen-app/semagen-api/public/index.php/api/v1/productos";
     private REST_API_SERVER_PROD = "http://zirtrex.net/semagen_api/public/index.php/api/v1/productos";
 
     constructor(private http:HttpClient) { }
@@ -24,9 +24,9 @@ export class ProductoService {
                 .pipe(catchError(this.handleError));
     }
 
-    obtenerProducto(idProducto: String): Observable<Producto[]>{
+    obtenerProducto(idProducto: String): Observable<any>{
       return this.http
-                .get<Producto[]>(this.REST_API_SERVER_PROD + '/' + idProducto);
+                .get<any>(this.REST_API_SERVER_PROD + '/' + idProducto);
     }
 
     editarProducto(producto: Producto): Observable<Producto[]>{

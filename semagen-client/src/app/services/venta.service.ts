@@ -7,7 +7,7 @@ import { Venta } from '../models/venta';
 @Injectable()
 export class VentaService {
 
-  private REST_API_SERVER_DEV = "http://localhost/Rafael/Proyectos/Proyectos_Web/inventario_semagen/public/index.php/api/v1/ventas";
+  private REST_API_SERVER_DEV = "http://localhost/Rafael/Proyectos/Proyectos_Web/semagen-app/semagen-api/public/index.php/api/v1/ventas";
   private REST_API_SERVER_PROD = "http://zirtrex.net/semagen_api/public/index.php/api/v1/ventas";
 
   constructor(private http:HttpClient) { }

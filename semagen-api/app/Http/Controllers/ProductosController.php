@@ -38,7 +38,7 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-      if( (!$request->nombreProducto) || (!$request->stock) ){
+      if( !$request->nombreProducto ){
         $response = Response::json([
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
@@ -99,7 +99,7 @@ class ProductosController extends Controller
      */
     public function update(Request $request, $id)
     {
-      if( (!$request->nombreProducto) || (!$request->stock) ){
+      if( !$request->idProducto ){
         $response = Response::json([
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
