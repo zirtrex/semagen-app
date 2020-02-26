@@ -15,6 +15,7 @@ class CreateProductosTable extends Migration
     {
         Schema::create('invsem_productos', function (Blueprint $table) {
             $table->increments('idProducto');
+            $table->string('codigoProducto', 10)->nullable();
             $table->string('nombreProducto', 500);
             $table->integer('stock');
             $table->timestamps();

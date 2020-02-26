@@ -18,29 +18,30 @@ export class VentaService {
               .pipe(catchError(this.handleError));
   }
 
-  agregarVenta(venta: Venta): Observable<Venta[]>{
+  //Cambio de Venta[] por any
+  agregarVenta(venta: Venta): Observable<any>{
     return this.http
-              .post<Venta[]>(this.REST_API_SERVER_PROD, venta)
+              .post<any>(this.REST_API_SERVER_PROD, venta)
               .pipe(catchError(this.handleError));
   }
 
-  obtenerVenta(idVentas: String): Observable<Venta[]>{
+  obtenerVenta(idVentas: String): Observable<any>{
     return this.http
-              .get<Venta[]>(this.REST_API_SERVER_PROD + '/' + idVentas)
+              .get<any>(this.REST_API_SERVER_PROD + '/' + idVentas)
               .pipe(catchError(this.handleError));
   }
 
-  editarVenta(venta: Venta): Observable<Venta[]>{
+  editarVenta(venta: Venta): Observable<any>{
     const url = `${this.REST_API_SERVER_PROD}/${venta["idVentas"]}`; //console.log(venta);
     return this.http
-              .put<Venta[]>(url, venta)
+              .put<any>(url, venta)
               .pipe(catchError(this.handleError));
   }
 
-  eliminarVenta(idVentas: String){
+  eliminarVenta(idVentas: String): Observable<any>{
     const url = `${this.REST_API_SERVER_PROD}/${idVentas}`;
     return this.http
-              .delete(url)
+              .delete<any>(url)
               .pipe(catchError(this.handleError));
   }
 

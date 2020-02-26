@@ -15,14 +15,17 @@ export class CrearProductoComponent implements OnInit {
   }
 
   crearProducto(producto){
-    this.productoService.agregarProducto(producto).
-          subscribe(
-            producto => {
-                console.log(producto);
-                this.router.navigate(['/productos']);
-            },
-            error => console.log(<any> error)
-          )
+    this.productoService.agregarProducto(producto)
+      .subscribe(
+        response => {
+            console.log(response);
+            alert(response.message);
+            if(!response.error){
+              this.router.navigate(['/productos']);
+            }
+        },
+        error => console.log(<any> error)
+      )
   }
 
 }

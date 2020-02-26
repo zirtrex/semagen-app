@@ -14,7 +14,7 @@
               <td>Precio unitario</td>
               <td>Precio total</td>
               <td>Observaciones</td>
-              <td>Id Producto</td>
+              <td>Cod - Producto</td>
               <td>Acciones</td>
           </tr>
       </thead>
@@ -28,7 +28,7 @@
             <td>{{venta.precioUnitario}}</td>
             <td>{{venta.precioTotal}}</td>
             <td>{{venta.observaciones}}</td>
-            <td>{{venta.producto.nombreProducto}}</td>
+            <td>{{venta.producto.codigoProducto}} - {{venta.producto.nombreProducto}}</td>
             <td>
               <a [routerLink]="['/ventas/edit', venta.idVentas]" class="btn btn-info">Editar</a>
               <a [routerLink]="['/ventas/delete', venta.idVentas]" class="btn btn-danger">Borrar</a>

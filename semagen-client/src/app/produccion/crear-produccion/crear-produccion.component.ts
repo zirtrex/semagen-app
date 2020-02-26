@@ -17,7 +17,11 @@ export class CrearProduccionComponent implements OnInit {
 
   produccion = new Produccion();
 
-  constructor(private activatedRoute: ActivatedRoute, private router:Router, private produccionService:ProduccionService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+    private produccionService:ProduccionService
+  ) { }
 
   ngOnInit() {
     this.params = this.activatedRoute.params.subscribe(params => this.idProducto = params['idProducto']);
@@ -32,9 +36,11 @@ export class CrearProduccionComponent implements OnInit {
     this.produccionService.agregarProduccion(produccion)
       .subscribe(
         response => {
-            console.log(response);
-            //alert(response.message);
+          console.log(response);
+          alert(response.message);
+          if(!response.error){
             this.router.navigate(['/producciones']);
+          }
         },
         error => console.log(<any> error)
       )

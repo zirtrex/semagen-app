@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VentaService } from '../../services/venta.service';
 import { Venta } from '../../models/venta';
 
@@ -15,7 +15,7 @@ export class EditarVentaComponent implements OnInit {
 
   venta = new Venta();
 
-  constructor(private ventaService:VentaService, private activatedRoute: ActivatedRoute) { }
+  constructor(private ventaService:VentaService, private activatedRoute: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.params = this.activatedRoute.params.subscribe(params => this.idVentas = params['idVentas']);
@@ -43,14 +43,17 @@ export class EditarVentaComponent implements OnInit {
   }
 
   editarVenta(venta){ console.log(venta);
-    this.ventaService.editarVenta(venta).
-          subscribe(
-            venta => {
-                console.log(venta);
-
-            },
-            error => console.log(<any> error)
-          )
+    this.ventaService.editarVenta(venta)
+      .subscribe(
+        response => {
+          console.log(response);
+          alert(response.message);
+          if(!response.error){
+            this.router.navigate(['/ventas']);
+          }
+        },
+        error => console.log(<any> error)
+      )
   }
 
 }

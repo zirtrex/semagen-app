@@ -44,8 +44,10 @@ export class EliminarVentaComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
             console.log(response);
-            //alert(response.message);
-            this.router.navigate(['/ventas']);
+            alert(response.message);
+            if(!response.error){
+              this.router.navigate(['/ventas']);
+            }
         },
         error => console.log(<any> error)
       )

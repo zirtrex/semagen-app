@@ -18,22 +18,22 @@ export class ProduccionService {
               .pipe(catchError(this.handleError));
   }
 
-  agregarProduccion(produccion: Produccion): Observable<Produccion[]>{
+  agregarProduccion(produccion: Produccion): Observable<any>{
     return this.http
-              .post<Produccion[]>(this.REST_API_SERVER_PROD, produccion)
+              .post<any>(this.REST_API_SERVER_PROD, produccion)
               .pipe(catchError(this.handleError));
   }
 
-  obtenerProduccion(idProduccion: String): Observable<Produccion[]>{
+  obtenerProduccion(idProduccion: String): Observable<any>{
     return this.http
-              .get<Produccion[]>(this.REST_API_SERVER_PROD + '/' + idProduccion)
+              .get<any>(this.REST_API_SERVER_PROD + '/' + idProduccion)
               .pipe(catchError(this.handleError));
   }
 
-  editarProduccion(produccion: Produccion): Observable<Produccion[]>{
+  editarProduccion(produccion: Produccion): Observable<any>{
     const url = `${this.REST_API_SERVER_PROD}/${produccion["idProduccion"]}`;
     return this.http
-              .put<Produccion[]>(url, produccion)
+              .put<any>(url, produccion)
               .pipe(catchError(this.handleError));
   }
 

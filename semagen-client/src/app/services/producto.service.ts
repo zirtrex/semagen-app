@@ -18,9 +18,10 @@ export class ProductoService {
                 .pipe(catchError(this.handleError));
     }
 
-    agregarProducto(producto: Producto): Observable<Producto[]>{
+    //Se cambio Producto[] por any porque aquí no siempre devuelve un producto
+    agregarProducto(producto: Producto): Observable<any>{
       return this.http
-                .post<Producto[]>(this.REST_API_SERVER_PROD, producto)
+                .post<any>(this.REST_API_SERVER_PROD, producto)
                 .pipe(catchError(this.handleError));
     }
 
@@ -29,17 +30,17 @@ export class ProductoService {
                 .get<any>(this.REST_API_SERVER_PROD + '/' + idProducto);
     }
 
-    editarProducto(producto: Producto): Observable<Producto[]>{
+    editarProducto(producto: Producto): Observable<any>{
       const url = `${this.REST_API_SERVER_PROD}/${producto["idProducto"]}`;
       return this.http
-                .put<Producto[]>(url, producto)
+                .put<any>(url, producto)
                 .pipe(catchError(this.handleError));
     }
 
-    eliminarProducto(idProducto: String){
+    eliminarProducto(idProducto: String): Observable<any>{
       const url = `${this.REST_API_SERVER_PROD}/${idProducto}`;
       return this.http
-                .delete(url)
+                .delete<any>(url)
                 .pipe(catchError(this.handleError));
     }
 

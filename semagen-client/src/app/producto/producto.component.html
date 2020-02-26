@@ -7,7 +7,8 @@
       <thead class="thead-dark">
           <tr>
               <td>Id</td>
-              <td>Nombre de producto</td>
+              <td>Código</td>
+              <td>Nombre</td>
               <td>Stock</td>
               <td>Acciones</td>
           </tr>
@@ -15,6 +16,7 @@
       <tbody>
           <tr *ngFor="let producto of productos | async" >
             <td>{{producto.idProducto}}</td>
+            <td>{{producto.codigoProducto}}</td>
             <td>{{producto.nombreProducto}}</td>
             <td>{{producto.stock}}</td>
             <td>

@@ -40,8 +40,9 @@ class ProduccionesController extends Controller
      */
     public function store(Request $request)
     {
-      if( (!$request->cantidad) || (!$request->idProducto) ){
+      if( !$request->idProducto ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
@@ -69,6 +70,7 @@ class ProduccionesController extends Controller
         }
 
         $response = Response::json([
+          'error' => false,
           'message' => 'Producción creada con éxito',
           'produccion' => $produccion
         ], 201);
@@ -78,6 +80,7 @@ class ProduccionesController extends Controller
           $errorCode = $e->errorInfo[1];
           $errorMessage = $e->getMessage();
           $response = Response::json([
+            'error' => true,
             'message' => 'Ha ocurrido un error: ' . $errorCode . '-' . $errorMessage
           ], 422);
           return $response;
@@ -96,6 +99,7 @@ class ProduccionesController extends Controller
 
       if(!$produccion){
         $response = Response::json([
+          'error' => true,
           'message' => "No se ha encontrado la produccion"
         ], 404);
         return $response;
@@ -125,8 +129,9 @@ class ProduccionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-      if( (!$request->idProduccion) || (!$request->cantidad) ){
+      if( !$request->idProduccion ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
@@ -136,6 +141,7 @@ class ProduccionesController extends Controller
 
       if( !$produccion ){
         $response = Response::json([
+          'error' => true,
           'message' => 'No se ha encontrado el producto'
         ], 404);
         return $response;
@@ -165,6 +171,7 @@ class ProduccionesController extends Controller
         }
 
         $response = Response::json([
+          'error' => false,
           'message' => 'Produccion editada con exito',
           'produccion' => $produccion
         ], 201);
@@ -174,6 +181,7 @@ class ProduccionesController extends Controller
           $errorCode = $e->errorInfo[1];
           $errorMessage = $e->getMessage();
           $response = Response::json([
+            'error' => true,
             'message' => 'Ha ocurrido un error: ' . $errorCode . '-' . $errorMessage
           ], 422);
           return $response;

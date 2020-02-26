@@ -40,18 +40,21 @@ class ProductosController extends Controller
     {
       if( !$request->nombreProducto ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
       }
 
       $producto = new Producto(array(
+        'codigoProducto' => trim($request->codigoProducto),
         'nombreProducto' => trim($request->nombreProducto),
         'stock' => trim($request->stock)
       ));
 
       $producto->save();
       $response = Response::json([
+        'error' => false,
         'message' => 'Producto creado con exito',
         'producto' => $producto
       ], 201);
@@ -70,7 +73,8 @@ class ProductosController extends Controller
 
       if(!$producto){
         $response = Response::json([
-          'error' => ['message' => "No se ha encontrado el producto"]
+          'error' => true,
+          'message' => "No se ha encontrado el producto"
         ], 404);
         return $response;
       }
@@ -101,6 +105,7 @@ class ProductosController extends Controller
     {
       if( !$request->idProducto ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
@@ -110,17 +115,20 @@ class ProductosController extends Controller
 
       if( !$producto ){
         $response = Response::json([
+          'error' => true,
           'message' => 'No se ha encontrado el producto'
         ], 404);
         return $response;
       }
 
+      $producto->codigoProducto = trim($request->codigoProducto);
       $producto->nombreProducto = trim($request->nombreProducto);
       $producto->stock = trim($request->stock);
 
       $producto->save();
 
       $response = Response::json([
+        'error' => false,
         'message' => 'Producto actualizado con exito',
         'producto' => $producto
       ], 201);
@@ -139,12 +147,14 @@ class ProductosController extends Controller
 
       if(!$producto){
         $response = Response::json([
+          'error' => true,
           'message' => "No se ha encontrado el producto"
         ], 404);
         return $response;
       }
       $producto->delete();
       $response = Response::json([
+        'error' => false,
         'message' => 'Producto eliminado con exito',
         'producto' => $producto
       ], 200);

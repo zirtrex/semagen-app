@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto';
 
@@ -13,9 +13,9 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
   idProducto: any;
   params: any;
 
-  producto = new Producto(1, 'nombreProducto', 1);
+  producto = new Producto(0, 0, '', 0);
 
-  constructor(private productoService:ProductoService, private activatedRoute: ActivatedRoute) { }
+  constructor(private productoService:ProductoService, private activatedRoute: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     this.params = this.activatedRoute.params.subscribe(params => this.idProducto = params['idProducto']);
@@ -23,6 +23,7 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
       data => {
         console.log(data);
         this.producto.idProducto = data['idProducto'];
+        this.producto.codigoProducto = data['codigoProducto'];
         this.producto.nombreProducto = data['nombreProducto'];
         this.producto.stock = data['stock'];
       },
@@ -35,13 +36,16 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
   }
 
   editarProducto(producto){
-    this.productoService.editarProducto(producto).
-          subscribe(
-            producto => {
-                console.log(producto);
-                alert("Producto actualizado con éxito");                
-            },
-            error => console.log(<any> error)
-          )
+    this.productoService.editarProducto(producto)
+      .subscribe(
+        response => {
+          console.log(response);
+          alert(response.message);
+          if(!response.error){
+              this.router.navigate(['/productos']);
+          }
+        },
+        error => console.log(<any> error)
+      )
   }
 }

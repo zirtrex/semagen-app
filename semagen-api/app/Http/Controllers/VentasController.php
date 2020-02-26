@@ -41,8 +41,9 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-      if( (!$request->cantidad) || (!$request->idProducto) ){
+      if( !$request->idProducto ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
@@ -74,6 +75,7 @@ class VentasController extends Controller
         }
 
         $response = Response::json([
+          'error' => false,
           'message' => 'Venta creada con exito',
           'venta' => $venta
         ], 201);
@@ -83,6 +85,7 @@ class VentasController extends Controller
           $errorCode = $e->errorInfo[1];
           $errorMessage = $e->getMessage();
           $response = Response::json([
+            'error' => true,
             'message' => 'Ha ocurrido un error: ' . $errorCode . '-' . $errorMessage
           ], 422);
           return $response;
@@ -102,6 +105,7 @@ class VentasController extends Controller
 
       if(!$venta){
         $response = Response::json([
+          'error' => true,
           'message' => "No se ha encontrado la venta"
         ], 404);
         return $response;
@@ -131,8 +135,9 @@ class VentasController extends Controller
      */
     public function update(Request $request, $id)
     {
-      if( (!$request->idVentas) || (!$request->cantidad) ){
+      if( !$request->idVentas ){
         $response = Response::json([
+          'error' => true,
           'message' => 'Por favor escriba todos los campos requeridos'
         ], 422);
         return $response;
@@ -142,6 +147,7 @@ class VentasController extends Controller
 
       if( !$venta ){
         $response = Response::json([
+          'error' => true,
           'message' => 'No se ha encontrado el producto'
         ], 404);
         return $response;
@@ -174,6 +180,7 @@ class VentasController extends Controller
         }
 
         $response = Response::json([
+          'error' => false,
           'message' => 'Venta editada con exito',
           'venta' => $venta
         ], 201);
@@ -183,6 +190,7 @@ class VentasController extends Controller
           $errorCode = $e->errorInfo[1];
           $errorMessage = $e->getMessage();
           $response = Response::json([
+            'error' => true,
             'message' => 'Ha ocurrido un error: ' . $errorCode . '-' . $errorMessage
           ], 422);
           return $response;
@@ -201,6 +209,7 @@ class VentasController extends Controller
 
       if(!$venta){
         $response = Response::json([
+          'error' => true,
           'message' => "No se ha encontrado la venta"
         ], 404);
         return $response;
@@ -218,6 +227,7 @@ class VentasController extends Controller
         }
 
         $response = Response::json([
+          'error' => false,
           'message' => 'Venta eliminada con exito',
           'venta' => $venta
         ], 200);
@@ -227,6 +237,7 @@ class VentasController extends Controller
           $errorCode = $e->errorInfo[1];
           $errorMessage = $e->getMessage();
           $response = Response::json([
+            'error' => true,
             'message' => 'Ha ocurrido un error: ' . $errorCode . '-' . $errorMessage
           ], 422);
           return $response;

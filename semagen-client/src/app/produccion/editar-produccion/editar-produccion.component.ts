@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProduccionService } from '../../services/produccion.service';
 import { Produccion } from '../../models/produccion';
 
@@ -15,7 +15,11 @@ export class EditarProduccionComponent implements OnInit {
 
   produccion = new Produccion();
 
-  constructor(private produccionService:ProduccionService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private produccionService:ProduccionService,
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+  ) { }
 
   ngOnInit() {
     this.params = this.activatedRoute.params.subscribe(params => this.idProduccion = params['idProduccion']);
@@ -39,14 +43,17 @@ export class EditarProduccionComponent implements OnInit {
   }
 
   editarProduccion(produccion){
-    this.produccionService.editarProduccion(produccion).
-          subscribe(
-            response => {
-                console.log(response);
-                //alert(response.message);
-            },
-            error => console.log(<any> error)
-          )
+    this.produccionService.editarProduccion(produccion)
+      .subscribe(
+        response => {
+            console.log(response);
+            alert(response.message);
+            if(!response.error){
+              this.router.navigate(['/producciones']);
+            }
+        },
+        error => console.log(<any> error)
+      )
   }
 
 }

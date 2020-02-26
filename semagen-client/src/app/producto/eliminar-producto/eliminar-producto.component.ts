@@ -13,7 +13,7 @@ export class EliminarProductoComponent implements OnInit, OnDestroy {
   idProducto: any;
   params: any;
 
-  producto = new Producto(1, 'nombreProducto', 1);
+  producto = new Producto(0, 0, '', 0);
 
   constructor(private productoService:ProductoService, private activatedRoute: ActivatedRoute, private router:Router) { }
 
@@ -23,6 +23,7 @@ export class EliminarProductoComponent implements OnInit, OnDestroy {
       data => {
         console.log(data);
         this.producto.idProducto = data['idProducto'];
+        this.producto.codigoProducto = data['codigoProducto'];
         this.producto.nombreProducto = data['nombreProducto'];
         this.producto.stock = data['stock'];
       },
@@ -38,16 +39,16 @@ export class EliminarProductoComponent implements OnInit, OnDestroy {
   }
 
   eliminarProducto(producto){
-    this.productoService
-      .eliminarProducto(producto)
+    this.productoService.eliminarProducto(producto)
       .subscribe(
         response => {
             console.log(response);
-            //alert(response.message);
-            this.router.navigate(['/productos']);
+            alert(response.message);
+            if(!response.error){
+              this.router.navigate(['/productos']);
+            }
         },
         error => console.log(<any> error)
       )
   }
-
 }

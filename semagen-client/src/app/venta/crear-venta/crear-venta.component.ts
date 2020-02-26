@@ -73,17 +73,19 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
   crearVenta(venta){
     if (this.crearVentaForm.valid)
     {
-        var venta = this.crearVentaForm.value;
-        console.log(venta);
-        this.ventaService.agregarVenta(venta)
-          .subscribe(
-            response => {
-                console.log(response);
-                this.router.navigate(['/ventas']);
-            },
-            error => console.log(<any> error)
-          );
+      var venta = this.crearVentaForm.value;
+      console.log(venta);
+      this.ventaService.agregarVenta(venta)
+        .subscribe(
+          response => {
+            console.log(response);
+            alert(response.message);
+            if(!response.error){
+              this.router.navigate(['/ventas']);
+            }
+          },
+          error => console.log(<any> error)
+        );
     }
   }
-
 }
