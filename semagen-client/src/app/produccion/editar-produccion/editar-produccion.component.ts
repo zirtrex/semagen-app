@@ -1,7 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProduccionService } from '../../services/produccion.service';
+import { ProductoService } from '../../services/producto.service';
 import { Produccion } from '../../models/produccion';
+import { Producto } from '../../models/producto';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatSnackBar
+} from "@angular/material";
 
 @Component({
   selector: 'app-editar-produccion',
@@ -10,20 +17,32 @@ import { Produccion } from '../../models/produccion';
 })
 export class EditarProduccionComponent implements OnInit {
 
-  idProduccion: any;
-  params: any;
-
-  produccion = new Produccion();
+  produccion: Produccion;
+  nombreProducto: any;
+  maxVenta = 0;
 
   constructor(
     private produccionService:ProduccionService,
+    private productoService:ProductoService,
     private activatedRoute: ActivatedRoute,
     private router:Router,
-  ) { }
+    private dialogRef: MatDialogRef<EditarProduccionComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private snackBar: MatSnackBar,
+  ) {
+    this.produccion = data;
+  }
 
   ngOnInit() {
-    this.params = this.activatedRoute.params.subscribe(params => this.idProduccion = params['idProduccion']);
-    this.produccionService.obtenerProduccion(this.idProduccion).subscribe(
+    this.productoService.obtenerProducto(this.produccion.idProducto.toString()).subscribe(
+      response => {
+        console.log(response);
+        this.maxVenta = response.stock;
+        this.nombreProducto = response.nombreProducto;
+      }
+    );
+
+    this.produccionService.obtenerProduccion(this.produccion.idProduccion.toString()).subscribe(
       data => {
         console.log(data);
         this.produccion.idProduccion = data['idProduccion'];
@@ -38,22 +57,27 @@ export class EditarProduccionComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(){
-    this.params.unsubscribe();
-  }
-
   editarProduccion(produccion){
     this.produccionService.editarProduccion(produccion)
       .subscribe(
         response => {
             console.log(response);
-            alert(response.message);
+            this.snackBar.open(response.message, null, {
+              duration: 10000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['text-warning']
+            });
             if(!response.error){
-              this.router.navigate(['/producciones']);
+              this.cerrarDialog();
             }
         },
         error => console.log(<any> error)
       )
+  }
+
+  cerrarDialog(){
+    this.dialogRef.close(this.produccion);
   }
 
 }

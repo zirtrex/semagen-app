@@ -1,7 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VentaService } from '../../services/venta.service';
+import { ProductoService } from '../../services/producto.service';
 import { Venta } from '../../models/venta';
+import { Producto } from '../../models/producto';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatSnackBar
+} from "@angular/material";
 
 @Component({
   selector: 'app-editar-venta',
@@ -10,36 +17,47 @@ import { Venta } from '../../models/venta';
 })
 export class EditarVentaComponent implements OnInit {
 
-  idVentas: any;
-  params: any;
+  venta: Venta;
+  nombreProducto: any;
+  maxVenta = 0;
 
-  venta = new Venta();
-
-  constructor(private ventaService:VentaService, private activatedRoute: ActivatedRoute, private router:Router) { }
+  constructor(
+    private ventaService:VentaService,
+    private productoService:ProductoService,
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+    private dialogRef: MatDialogRef<EditarVentaComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private snackBar: MatSnackBar,
+  ) {
+    this.venta = data;
+  }
 
   ngOnInit() {
-    this.params = this.activatedRoute.params.subscribe(params => this.idVentas = params['idVentas']);
-    this.ventaService.obtenerVenta(this.idVentas).subscribe(
-      data => {
-        console.log(data);
-        //this.venta = data;
-        this.venta.idVentas = data['idVentas'];
-        this.venta.comprador = data['comprador'];
-        this.venta.cantidad = data['cantidad'];
-        this.venta.fechaVenta = data['fechaVenta'];
-        this.venta.tipoPago = data['tipoPago'];
-        this.venta.precioUnitario = data['precioUnitario'];
-        this.venta.precioTotal = data['precioTotal'];
-        this.venta.observaciones = data['observaciones'];
-        this.venta.idProducto = data['idProducto'];
-        this.venta.producto = data['producto'];
+    this.productoService.obtenerProducto(this.venta.idProducto.toString()).subscribe(
+      response => {
+        console.log(response);
+        this.maxVenta = response.stock;
+        this.nombreProducto = response.nombreProducto;
+      }
+    );
+
+    this.ventaService.obtenerVenta(this.venta.idVentas.toString()).subscribe(
+      response => {
+        //console.log(data);
+        this.venta.idVentas = response['idVentas'];
+        this.venta.comprador = response['comprador'];
+        this.venta.cantidad = response['cantidad'];
+        this.venta.fechaVenta = response['fechaVenta'];
+        this.venta.tipoPago = response['tipoPago'];
+        this.venta.precioUnitario = response['precioUnitario'];
+        this.venta.precioTotal = response['precioTotal'];
+        this.venta.observaciones = response['observaciones'];
+        this.venta.idProducto = response['idProducto'];
+        this.venta.producto = response['producto'];
       },
       error => console.log(<any> error)
     );
-  }
-
-  ngOnDestroy(){
-    this.params.unsubscribe();
   }
 
   editarVenta(venta){ console.log(venta);
@@ -47,13 +65,22 @@ export class EditarVentaComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          alert(response.message);
+          this.snackBar.open(response.message, null, {
+            duration: 10000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['text-warning']
+          });
           if(!response.error){
-            this.router.navigate(['/ventas']);
+            this.cerrarDialog();
           }
         },
         error => console.log(<any> error)
       )
+  }
+
+  cerrarDialog(){
+    this.dialogRef.close(this.venta);
   }
 
 }

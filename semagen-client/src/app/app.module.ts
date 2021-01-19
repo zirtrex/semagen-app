@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { ProductoService } from './services/producto.service';
 import { VentaService } from './services/venta.service';
 import { ProduccionService } from './services/produccion.service';
+import { ExporterService } from './services/exporter.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar.component';
@@ -22,6 +23,9 @@ import { EliminarVentaComponent } from './venta/eliminar-venta/eliminar-venta.co
 import { ProduccionComponent } from './produccion/produccion.component';
 import { CrearProduccionComponent } from './produccion/crear-produccion/crear-produccion.component';
 import { EditarProduccionComponent } from './produccion/editar-produccion/editar-produccion.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -45,9 +49,24 @@ import { EditarProduccionComponent } from './produccion/editar-produccion/editar
     routes,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
-  providers: [ProductoService, VentaService, ProduccionService],
-  bootstrap: [AppComponent]
+  providers: [
+    ProductoService,
+    VentaService,
+    ProduccionService,
+    ExporterService
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CrearProductoComponent,
+    EditarProductoComponent,
+    EliminarProductoComponent,
+    EditarVentaComponent,
+    EliminarVentaComponent,
+    EditarProduccionComponent
+  ]
 })
 export class AppModule { }

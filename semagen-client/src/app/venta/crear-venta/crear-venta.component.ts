@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
-import { ProductoService } from '../../services/producto.service';
 import { VentaService } from '../../services/venta.service';
-import { Producto } from '../../models/producto';
+import { ProductoService } from '../../services/producto.service';
 import { Venta } from '../../models/venta';
+import { Producto } from '../../models/producto';
 import { CheckCantidad } from '../../validators/check-cantidad.validator';
 
 @Component({
@@ -58,7 +58,7 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
         observaciones: ['']
     },
     {
-        //validator: CheckCantidad('cantidad', 'cantidadMaxima')
+        validator: [CheckCantidad('cantidad', 'cantidadMaxima')]
     });
   }
 

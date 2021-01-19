@@ -37,7 +37,7 @@ export class ProductoService {
                 .pipe(catchError(this.handleError));
     }
 
-    eliminarProducto(idProducto: String): Observable<any>{
+    eliminarProducto(idProducto: string): Observable<any>{
       const url = `${this.REST_API_SERVER_PROD}/${idProducto}`;
       return this.http
                 .delete<any>(url)

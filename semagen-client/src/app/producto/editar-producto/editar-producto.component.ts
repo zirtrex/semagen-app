@@ -1,7 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatSnackBar
+} from "@angular/material";
 
 @Component({
   selector: 'app-editar-producto',
@@ -15,11 +20,20 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
 
   producto = new Producto(0, 0, '', 0);
 
-  constructor(private productoService:ProductoService, private activatedRoute: ActivatedRoute, private router:Router) { }
+  constructor(
+    private productoService:ProductoService,
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+    private dialogRef: MatDialogRef<EditarProductoComponent>,
+    @Inject(MAT_DIALOG_DATA) data,
+    private snackBar: MatSnackBar,
+  ) {
+    this.producto = data;
+  }
 
   ngOnInit() {
-    this.params = this.activatedRoute.params.subscribe(params => this.idProducto = params['idProducto']);
-    this.productoService.obtenerProducto(this.idProducto).subscribe(
+    //this.params = this.activatedRoute.params.subscribe(params => this.idProducto = params['idProducto']);
+    this.productoService.obtenerProducto(this.idProducto.toString()).subscribe(
       data => {
         console.log(data);
         this.producto.idProducto = data['idProducto'];
@@ -32,7 +46,7 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.params.unsubscribe();
+    //this.params.unsubscribe();
   }
 
   editarProducto(producto){
@@ -40,12 +54,22 @@ export class EditarProductoComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           console.log(response);
-          alert(response.message);
+          this.snackBar.open(response.message, null, {
+            duration: 10000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['text-warning']
+          });
           if(!response.error){
-              this.router.navigate(['/productos']);
+              //this.router.navigate(['/productos']);
+              this.cerrarDialog();
           }
         },
         error => console.log(<any> error)
       )
+  }
+
+  cerrarDialog(){
+    this.dialogRef.close(this.producto);
   }
 }
